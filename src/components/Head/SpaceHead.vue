@@ -5,6 +5,7 @@
     <el-menu-item index="2"><router-link to="/space/dynamics" style="font-size: 18px;text-decoration: none">动态</router-link></el-menu-item>
     <el-menu-item index="3"><router-link to="/space/collections"style="font-size: 18px;text-decoration: none">收藏</router-link></el-menu-item>
     <el-menu-item index="4"><router-link to="/space/manuscript"style="font-size: 18px;text-decoration: none">投稿</router-link></el-menu-item>
+    <el-menu-item index="5"><router-link to="/space/friend"style="font-size: 18px;text-decoration: none">好友</router-link></el-menu-item>
   </el-menu>
   </div>
 </template>

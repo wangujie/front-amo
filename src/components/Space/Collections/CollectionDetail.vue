@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-col :span="8" v-for="info in collectionInfo">
+    <el-col :span="6" v-for="(info,i) in collectionInfo" :key="i">
       <el-card :body-style="{ padding: '0px'}">
         <div class="image">
           <img :src="info.cover">
@@ -8,7 +8,14 @@
         <div style="padding: 14px;">
           <span>{{info.title}}</span>
            <time>{{info.publishdate}}</time>
+          <el-dropdown placement="bottom-start">
+            <span class="el-dropdown-link"><i class="el-icon-arrow-down el-icon--right"></i></span>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item @click.native="noCollection(i)">取消收藏</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </div>
+
       </el-card>
     </el-col>
   </el-row>
@@ -22,6 +29,8 @@
       return{
         collectionId:'',
         collectionInfo:[],
+        dialogVisible:false,
+
       }
     },
     mounted () {
@@ -36,6 +45,20 @@
         this.collectionInfo=res.data
       })
     },
+    methods:{
+      noCollection(index){
+        let url =`http://localhost:8088/collect/moveOutList`
+        axios.get(url,{
+          params:{
+            manuscript_id:this.collectionInfo[index].id,
+            list_id:this.collectionId,
+          }
+        }).then(res=>{
+          if(res.data.success==true)
+            this.$router.go(0)
+        })
+      },
+    }
   }
 </script>
 
