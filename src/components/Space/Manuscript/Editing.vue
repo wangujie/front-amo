@@ -7,7 +7,7 @@
       <el-form-item label="封面" prop="cover">
         <el-upload
           class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action="http://localhost:8088/upload/"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload">
@@ -87,8 +87,7 @@
 
       },
       handleAvatarSuccess (res, file) {
-        this.form.cover = URL.createObjectURL(file.raw);
-        console.log(this.form.cover)
+        this.form.cover = res
       },
       beforeAvatarUpload (file) {
         const isJPG = file.type === 'image/jpeg';

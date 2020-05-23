@@ -7,7 +7,14 @@ import Register from '../components/Register/Register'
 
 /*个人空间相关*/
 import Space from '../components/Space/Space'
+
+/*消息相关*/
 import Message from '../components/Space/Message/Message'
+import MyMessage from "../components/Space/Message/MyMessage";
+import MyMessageDetail from "../components/Space/Message/MyMessageDetail";
+import Reply from "../components/Space/Message/Reply";
+import ThumpUp from "../components/Space/Message/ThumpUp";
+
 import Dynamics from '../components/Space/Dynamics/Dynamics'
 import Collection from '../components/Space/Collections/Collection'
 import CollectionDetail from '../components/Space/Collections/CollectionDetail'
@@ -23,6 +30,9 @@ import Video from '../components/Space/Manuscript/ManuManagement/Video'
 import Friend from '../components/Space/Friend/Friend'
 import Fans from '../components/Space/Friend/Fans'
 import Focus from '../components/Space/Friend/Focus'
+
+import History from "../components/Space/History/History";
+import Edit from "../components/Space/Edit/Edit";
 
 import Article from '../components/Articles/Article'
 Vue.use(Router)
@@ -51,7 +61,27 @@ export default new Router({
       children:[
         {
           path:'message',
-          component:Message
+          component:Message,
+          children:[
+            {
+              path:'reply',
+              component:Reply,
+            },
+            {
+              path:'thumps',
+              component:ThumpUp,
+            },
+            {
+              path:'mymessage',
+              component:MyMessage,
+              children:[
+                {
+                  path: ':id',
+                  component: MyMessageDetail
+                }
+              ]
+            }
+          ]
         },
         {
           path: 'dynamics',
@@ -112,6 +142,14 @@ export default new Router({
               component: Fans,
             }
           ]
+        },
+        {
+          path:'history',
+          component:History,
+        },
+        {
+          path:'edit',
+          component:Edit
         }
       ]
     },

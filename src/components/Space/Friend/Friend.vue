@@ -99,7 +99,6 @@
     },
     methods:{
       addGroup(){
-        console.log("fuck")
         this.tmpForm1.userId=JSON.parse(sessionStorage.getItem('form')).id
         this.dialogVisible2=true
       },

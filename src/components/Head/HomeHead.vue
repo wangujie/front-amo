@@ -1,5 +1,6 @@
 <template>
-  <div class="homepage">
+  <el-container>
+    <el-header>
     <div class="hp-header">
           <div class="nav-amo">
             <p>AMO</p>
@@ -20,17 +21,28 @@
                 </el-menu>
               </div>
               <div class="user-log">
-                <el-menu mode="horizontal" text-color="#1C86EE" active-text-color="#000080" style="height: 52px; margin: 0 auto;border: 0;float: right">
+                <el-menu mode="horizontal" text-color="#1C86EE" active-text-color="#000080" style="height: 52px; margin: 0 auto;border: 0;float: right" v-if="isLog">
+                  <el-menu-item>
+                    <router-link to="/space" target='_blank' style="font-size: 18px;text-decoration: none">
+                      <el-avatar v-if="avatar" :src="require('../../assets/'+avatar+'.JPG')"></el-avatar>
+                      <el-avatar v-else icon="el-icon-user-solid"></el-avatar>
+                      <span>{{username}}</span>
+                    </router-link>
+                  </el-menu-item>
+                </el-menu>
+                <el-menu mode="horizontal" text-color="#1C86EE" active-text-color="#000080" style="height: 52px; margin: 0 auto;border: 0;float: right" v-else="isLog">
                   <el-menu-item><router-link to="/login" target='_blank' style="font-size: 18px;text-decoration: none">登录</router-link></el-menu-item>
                   <el-menu-item><router-link to="/register" target='_blank' style="font-size: 18px;text-decoration: none">注册</router-link></el-menu-item>
                 </el-menu>
               </div>
         </div>
+
       <div class="amo-banner">
 
       </div>
     </div>
-  </div>
+    </el-header>
+  </el-container>
 </template>
 
 <script>
@@ -40,6 +52,18 @@
       return{
         input:'',
         activeIndex:'',
+        isLog:false,
+        avatar:'',
+        username:'',
+      }
+    },
+    created() {
+      if(JSON.parse(sessionStorage.getItem('form'))!=null){
+        this.isLog=true
+        let tmp  =JSON.parse(sessionStorage.getItem('form')).picture
+        if(tmp!=null)
+          this.avatar=tmp.substring(0,tmp.length-4)
+        this.username=JSON.parse(sessionStorage.getItem('form')).username
       }
     },
     methods:{

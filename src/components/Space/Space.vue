@@ -1,6 +1,8 @@
 <template>
   <div>
-    <SpaceHead></SpaceHead>
+    <div>
+      <SpaceHead></SpaceHead>
+    </div>
     <div>
       <router-view></router-view>
     </div>
